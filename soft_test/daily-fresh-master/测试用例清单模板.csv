@@ -1,0 +1,2 @@
+Test Case ID,Test Item,Test Case Title,Test Criticality,Pre-condition,Input,Procedure,Output,Result,Status,Remark
+示例:U-REG-001,用户/注册,注册成功,高,未登录且用户名未占用,"用户名,邮箱,密码,确认密码",进入注册页-,跳转登录页且新增用户,,,功能测试
