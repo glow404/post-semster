@@ -1,0 +1,33 @@
+method:
+  name: "SIFT + Matching"
+  type: "traditional_feature_matching"
+
+data:
+  val_pairs: "data/pairs_val.csv"
+  test_pairs: "data/pairs_test.csv"
+  image_root: "."
+  image_size:
+    height: 100
+    width: 110
+
+sift:
+  use_clahe: true
+  use_ransac: true
+  matcher: "BFMatcher"
+  ratio: 0.75
+  ransac_reproj_threshold: 5.0
+  score: "good_matches / max(num_keypoints_img1, num_keypoints_img2, 1)"
+
+threshold:
+  selection_split: "validation"
+  metric: "f1"
+  threshold_grid: 101
+  positive_rule: "score >= threshold"
+
+output:
+  output_dir: "results/sift"
+  val_scores: "val_scores.csv"
+  test_scores: "test_scores.csv"
+  metrics: "metrics.json"
+  roc_curve: "roc_curve.png"
+  config: "config.json"

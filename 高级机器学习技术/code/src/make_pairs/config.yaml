@@ -1,0 +1,126 @@
+# 数据准备子任务默认配置
+# 目录：src/make_pairs/
+# 当前脚本仍使用命令行参数运行，本文件用于记录和复现实验配置。
+
+task:
+  name: "Data Preparation"
+  type: "data_preparation"
+  description: "从原始指纹图像目录生成 labels.csv，并划分 train/val/test 与正负图像对"
+
+# ---------------------------------------------------------------------------
+# 原始输入：指纹图像目录（不是 data/ 目录）
+# ---------------------------------------------------------------------------
+raw_data:
+  # 每个一级子文件夹名就是一个 finger_id
+  data_root: "rawdata/data"
+  # 后续训练/测试脚本读取 CSV 中相对路径时的基准目录，通常为项目根目录
+  image_root: "."
+  image_size:
+    height: 100
+    width: 110
+  supported_extensions:
+    - ".png"
+    - ".jpg"
+    - ".jpeg"
+    - ".bmp"
+    - ".tif"
+    - ".tiff"
+  ignored_names:
+    - "__MACOSX"
+    - ".DS_Store"
+  example_structure:
+    - "rawdata/data/dy_L0/"
+    - "rawdata/data/SSH_L0/"
+    - "rawdata/data/zyh_R1/"
+
+# ---------------------------------------------------------------------------
+# 步骤 1：从文件夹名生成 labels.csv
+# 脚本：src/make_pairs/build_labels_from_folders.py
+# ---------------------------------------------------------------------------
+build_labels:
+  script: "src/make_pairs/build_labels_from_folders.py"
+  data_root: "rawdata/data"
+  output_csv: "data/labels.csv"
+  # image_path 相对该目录保存，默认项目根目录
+  relative_to: "."
+  print_summary: true
+  output_fields:
+    - "image_path"
+    - "finger_id"
+
+# ---------------------------------------------------------------------------
+# 步骤 2：按 finger_id 划分数据集并构造图像对
+# 脚本：src/make_pairs/make_pairs.py
+# ---------------------------------------------------------------------------
+make_pairs:
+  script: "src/make_pairs/make_pairs.py"
+  label_csv: "data/labels.csv"
+  output_dir: "data"
+  split:
+    # 必须按 finger_id 划分，不能按图像随机划分
+    by: "finger_id"
+    train_ratio: 0.7
+    val_ratio: 0.15
+    test_ratio: 0.15
+    seed: 42
+  pairs:
+    # 负样本数 / 正样本数；1.0 表示尽量保持 1:1
+    pos_neg_ratio: 1.0
+    # 每个 finger_id 最多采样多少个正样本对；0 表示保留全部组合
+    max_pos_pairs_per_finger: 200
+    seed_offsets:
+      train: 0
+      val: 1
+      test: 2
+    positive:
+      rule: "same finger_id"
+      label: 1
+      min_images_per_finger: 2
+    negative:
+      rule: "different finger_id"
+      label: 0
+      min_finger_ids: 2
+
+# ---------------------------------------------------------------------------
+# 输出：data/ 目录下生成的 CSV（不含原始图像）
+# ---------------------------------------------------------------------------
+output:
+  output_dir: "data"
+  labels:
+    all: "labels.csv"
+    train: "labels_train.csv"
+    val: "labels_val.csv"
+    test: "labels_test.csv"
+  pairs:
+    train: "pairs_train.csv"
+    val: "pairs_val.csv"
+    test: "pairs_test.csv"
+  label_fields:
+    - "image_path"
+    - "finger_id"
+  pair_fields:
+    - "img1"
+    - "img2"
+    - "label"
+    - "finger_id1"
+    - "finger_id2"
+
+# ---------------------------------------------------------------------------
+# 下游方法如何使用这些文件
+# ---------------------------------------------------------------------------
+downstream:
+  sift:
+    val_pairs: "data/pairs_val.csv"
+    test_pairs: "data/pairs_test.csv"
+    image_root: "."
+  siamese:
+    train_pairs: "data/pairs_train.csv"
+    val_pairs: "data/pairs_val.csv"
+    test_pairs: "data/pairs_test.csv"
+    image_root: "."
+  class_aware_moco:
+    train_labels: "data/labels_train.csv"
+    val_pairs: "data/pairs_val.csv"
+    test_pairs: "data/pairs_test.csv"
+    all_labels: "data/labels.csv"
+    image_root: "."
