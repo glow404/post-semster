@@ -1,0 +1,29 @@
+基于《周宇航开题报告.docx》参考文献目录及课题“面向小指纹的自监督学习局部特征提取算法研究”筛选。
+
+报告参考文献中的英文论文：
+[10] Lowe, Distinctive Image Features from Scale-Invariant Keypoints -> sift_lowe.pdf
+[14] Chen et al., A Hybrid Deep Learning and Feature Descriptor Approach for Partial Fingerprint Recognition -> hybrid_partial_fingerprint.pdf
+[17] Balntas et al., Learning Local Feature Descriptors with Triplets and Shallow Convolutional Neural Networks -> local_descriptors_triplets.pdf
+[18] Mishchuk et al., Working Hard to Know Your Neighbor's Margins: Local Descriptor Learning Loss -> hardnet_local_descriptor.pdf
+[19] Chopra et al., Learning a Similarity Metric Discriminatively, with Application to Face Verification -> similarity_metric.pdf
+[20] Hadsell et al., Dimensionality Reduction by Learning an Invariant Mapping -> invariant_mapping.pdf
+[21] Schroff et al., FaceNet: A Unified Embedding for Face Recognition and Clustering -> facenet.pdf
+[22] Sohn, Improved Deep Metric Learning with Multi-class N-pair Loss Objective -> npair_loss.pdf
+[25] Zhang et al., A Multi-task Fully Deep Convolutional Neural Network for Contactless Fingerprint Minutiae Extraction -> contactless_minutiae_extraction.pdf
+[31] He et al., Momentum Contrast for Unsupervised Visual Representation Learning -> moco.pdf
+[33] Khosla et al., Supervised Contrastive Learning -> supcon.pdf
+[35] Chen et al., An Empirical Study of Training Self-Supervised Vision Transformers -> moco_v3.pdf
+[37] Grill et al., Bootstrap Your Own Latent -> byol.pdf
+[38] Caron et al., Unsupervised Learning of Visual Features by Contrasting Cluster Assignments -> swav.pdf
+[40] Bakheet and Al-Hamadi, Robust Fingerprint Minutiae Extraction and Matching Based on Improved SIFT Features -> robust_sift_fingerprint.pdf
+
+为保证中文论文与小指纹/低质量指纹场景覆盖而加入的开放全文：
+龚美婧、涂梦诺，《残缺指纹的常见类型与特征识别研究》 -> cn_partial_fingerprint_types.pdf
+
+补充的高相关开放英文论文：
+Alotaibi et al., Cross-Sensor Fingerprint Enhancement Using Adversarial Learning and Edge Loss -> cross_sensor_enhancement.pdf
+Mobile Contactless Fingerprint Recognition: Implementation, Performance and Usability Aspects -> mobile_contactless_fingerprint.pdf
+U-Net-Based Fingerprint Enhancement for 3D Fingerprint Recognition -> u_net_fingerprint_enhancement_final.pdf
+Wide Field of View Under-Panel Optical Lens Design for Fingerprint Recognition of Smartphone -> underpanel_optical_fingerprint.pdf
+
+共 20 篇 PDF。下载后已逐个检查文件头和可解析性；未保留网页验证页、空文件或重复副本。
