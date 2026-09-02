@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.museum.api.common.orm.dao.FileResourcesDao">
+
+    <insert id="insertFileAndGetId" parameterType="com.museum.api.common.orm.model.FileResources" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO file_resources(file_name, type, size, url, create_time, create_by, update_time, update_by)
+        VALUES(#{fileName}, #{type}, #{size}, #{url}, #{createTime}, #{createBy}, #{updateTime}, #{updateBy})
+
+    </insert>
+
+</mapper>

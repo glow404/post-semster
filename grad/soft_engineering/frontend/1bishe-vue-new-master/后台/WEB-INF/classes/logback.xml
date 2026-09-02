@@ -1,0 +1,29 @@
+<configuration>
+    <property resource="constants.properties"/>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level [ %logger{0} ] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="STDOUT"/>
+    </appender>
+
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${catalina.base}/logs/workman_admin_log.log</File>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level [ %logger{0} ] - %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina.base}/logs/workman_admin.%d{yyyy-MM-dd}.gz</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <logger name="org.springframework" level="${framework.log.level}"/>
+
+    <root level="${log.level}">
+        <appender-ref ref="ASYNC"/>
+        <appender-ref ref="file"/>
+    </root>
+</configuration>

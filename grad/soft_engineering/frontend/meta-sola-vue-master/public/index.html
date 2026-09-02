@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title>
+        MetaSola
+    </title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        html,
+        body {
+            height: 100%;
+        }
+        
+        #app {
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+</body>
+<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+<script type="text/javascript">
+    sessionStorage.setItem('ip', returnCitySN["cip"])
+</script>
+
+</html>

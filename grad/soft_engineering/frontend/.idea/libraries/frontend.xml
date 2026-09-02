@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="frontend">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/bishe-vue-new-master.zip!/" />
+      <root url="jar://$PROJECT_DIR$/museum-frontend-master.zip!/" />
+      <root url="jar://$PROJECT_DIR$/bowuguanvue-master.zip!/" />
+      <root url="jar://$PROJECT_DIR$/cultural-relics-database-web-master.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

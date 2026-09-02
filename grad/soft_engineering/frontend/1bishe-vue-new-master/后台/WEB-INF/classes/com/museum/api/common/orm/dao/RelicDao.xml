@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.museum.api.common.orm.dao.RelicDao">
+
+    <select id="getRelicBySearchVO" resultType="com.museum.api.core.vo.RelicInfoVO">
+        SELECT
+          id,
+          name,
+          pic_url AS picUrl,
+          code,
+          relic_type AS relicType,
+          amount,
+          level,
+          size,
+          weight,
+          attrition_rate AS attritionRate,
+          application,
+          craft,
+          material,
+          shape,
+          feature,
+          cultural_connotation AS CulturalConnotation,
+          required_tech AS requiredTech,
+          area,
+          age,
+          create_by AS createBy,
+          create_time AS createTime,
+          update_by AS updateBy,
+          update_time AS updateTime,
+          introduction,
+          protect_value AS protectValue,
+          culture_value AS cultureValue,
+          dynasty,
+          (
+            SELECT group_concat(fr.url) FROM
+              relic_images AS ri
+              LEFT JOIN file_resources AS fr
+              ON  fr.id = ri.file_id
+            WHERE ri.relic_id = re.id
+
+          ) AS imagesString
+
+        FROM relic AS re
+
+        WHERE 1 =1
+
+        <if test="searchVO.relicId != null">
+            AND re.id = #{searchVO.relicId}
+        </if>
+
+        <if test="searchVO.name != null and searchVO.name != ''">
+            AND re.name LIKE CONCAT (CONCAT('%', #{searchVO.name}), '%')
+        </if>
+
+        <if test="searchVO.relicType != null">
+            AND re.relic_type = #{searchVO.relicType}
+        </if>
+
+        ORDER BY update_time DESC
+
+    </select>
+
+</mapper>

@@ -1,0 +1,38 @@
+.p-set {
+    margin: 0;
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 3;
+    word-wrap: break-word;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    line-height: 20px;
+    cursor: pointer;
+}
+
+.m-ui {
+    font-size: 13px;
+    display: inline-flex;
+    align-items: center;
+    justify-items: center;
+    background: #fff;
+    color: #606266;
+    border: 0;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-right: 8px;
+    padding: 3px;
+}
+
+.row-top {
+    height: 100%;
+    overflow: auto;
+}
+
+.scrollbar-demo-item {
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    border-radius: 4px;
+}
